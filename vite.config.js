@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/NorthSouthCharters/",   // <-- change this to your GitHub repo name
+  base: "/", // custom domain serves from root
   logLevel: "info",
   plugins: [
     base44({

@@ -39,7 +39,7 @@ export default function Layout({ children, currentPageName }) {
                         {/* Logo */}
                         <Link to={createPageUrl('Home')} className="flex items-center space-x-3">
                             <img 
-                                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696666cb8b0ce9b9ee0be45f/afcc4dc6a_logo-icon-no-words.png" 
+                                src="images/images/logo-icon-no-words.jpeg" 
                                 alt="North South Charters" 
                                 className="h-12 w-12"
                             />
