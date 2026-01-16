@@ -1,19 +1,19 @@
-import Home from './pages/Home';
-import Trips from './pages/Trips';
 import Captains from './pages/Captains';
-import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
+import Gallery from './pages/Gallery';
+import Home from './pages/Home';
 import Locations from './pages/Locations';
+import Trips from './pages/Trips';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
-    "Home": Home,
-    "Trips": Trips,
     "Captains": Captains,
-    "Gallery": Gallery,
     "Contact": Contact,
+    "Gallery": Gallery,
+    "Home": Home,
     "Locations": Locations,
+    "Trips": Trips,
 }
 
 export const pagesConfig = {
