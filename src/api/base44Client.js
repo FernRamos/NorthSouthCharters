@@ -1,14 +1,5 @@
-import { createClient } from '@base44/sdk';
-import { appParams } from '@/lib/app-params';
+// src/api/base44Client.js
+// Base44 is disabled for the self-hosted (GitHub Pages/custom domain) build.
+// This stub prevents the app from calling /api/apps/null/... on your domain.
 
-const { appId, token, functionsVersion, appBaseUrl } = appParams;
-
-//Create a client with authentication required
-export const base44 = createClient({
-  appId,
-  token,
-  functionsVersion,
-  serverUrl: '',
-  requiresAuth: false,
-  appBaseUrl
-});
+export const base44 = null;
