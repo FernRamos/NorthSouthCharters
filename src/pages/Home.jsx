@@ -112,7 +112,7 @@ export default function Home() {
         className="relative h-[600px] bg-cover bg-center flex items-center"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(/images/redfish14.jpeg)",
+            "linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(/images/redfish9.jpeg)",
           backgroundPosition: "center",
         }}
       >
