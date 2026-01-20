@@ -48,7 +48,7 @@ export default function Locations() {
         lat: 28.17626333833187,
         lon: -82.78866363820713,
         address: "1119 Baillies Bluff Rd, Holiday, FL 34691-9749",
-        noaaStationId: "8726942",
+        noaaStationId: "8726917",
       },
     ],
     []

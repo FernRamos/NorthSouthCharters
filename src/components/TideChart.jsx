@@ -6,7 +6,7 @@ import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tool
 const STATIONS = {
   "Crystal River": "8727333",
   "Tampa Bay": "8726607",
-  "Tarpon Springs": "8726942",
+  "Tarpon Springs": "8726917",
 };
 
 function formatHourLabel(isoLike) {
