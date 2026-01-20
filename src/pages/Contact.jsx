@@ -133,15 +133,15 @@ ${formData.message}
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-900 mb-1">Call or Text</h3>
-                    <p className="text-slate-600 text-sm mb-2">Fastest way to book</p>
+                    <p className="text-slate-600 text-sm mb-2">Leave a voicemail and we'll get back to you. Fastest way to book.</p>
 
                     {/* REPLACE THESE WITH YOUR REAL NUMBER */}
                     <a
-                      href="tel:+1XXXXXXXXXX"
+                      href="tel:+18139093901"
                       className="font-semibold"
                       style={{ color: "var(--brand-sky)" }}
                     >
-                      (XXX) XXX-XXXX
+                      (813) 909-3901
                     </a>
                   </div>
                 </div>
@@ -219,6 +219,36 @@ ${formData.message}
                 </ul>
               </CardContent>
             </Card>
+           
+            <Card className="border border-red-300 bg-red-50">
+              <CardContent className="p-6">
+                <h3 className="font-bold mb-3 text-red-800">
+                  What NOT to Bring
+                </h3>
+                <ul className="text-sm space-y-2 text-red-700">
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>GPS devices</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                   <span>•</span>
+                    <span>Hard coolers (we have a large cooler on board)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                   <span>•</span>
+                   <span>Illegal drugs or substances</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                   <span>•</span>
+                   <span>Weapons or firearms</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Black-soled shoes (they mark boat decks)</span>
+                  </li>
+                  </ul>
+                </CardContent>
+              </Card>
           </div>
 
           {/* Booking Form */}
