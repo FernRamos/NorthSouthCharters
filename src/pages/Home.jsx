@@ -118,7 +118,7 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <img
-            src="/images/logo-icon.png"
+            src="/images/logo-icon1.png"
             alt="North South Charters"
             className="mx-auto mb-8 w-32 h-32"
           />
