@@ -109,7 +109,7 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <div
-        className="relative h-[600px] bg-cover bg-center flex items-center"
+        className="relative h-[600px] bg-cover bg-center flex items-center pt-24 md:pt-0"
         style={{
           backgroundImage:
             "linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(/images/redfish9.jpeg)",

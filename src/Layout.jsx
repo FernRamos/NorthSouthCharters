@@ -165,11 +165,11 @@ export default function Layout({ children, currentPageName }) {
                   <span>(813) 909-3901</span>
                 </a>
                 <a
-                  href="mailto:info@nscharters.com"
+                  href="mailto:captfern@nscharters.com"
                   className="flex items-center space-x-2 hover:opacity-80 transition"
                 >
                   <Mail size={16} />
-                  <span>info@nscharters.com</span>
+                  <span>captfern@nscharters.com</span>
                 </a>
               </div>
             </div>
