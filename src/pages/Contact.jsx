@@ -150,7 +150,7 @@ export default function Contact() {
   <Card className="border border-red-200 bg-red-50 shadow-lg">
     <CardContent className="p-6">
       <h3 className="text-xl font-bold text-red-700 mb-4">
-        🚫 What NOT to Bring
+         What NOT to Bring
       </h3>
       <ul className="space-y-2 text-red-900 text-sm">
           <li>• Coolers (we've got one on the boat)</li>
