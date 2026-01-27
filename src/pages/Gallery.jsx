@@ -64,7 +64,7 @@ export default function Gallery() {
     return [
       { id: "all", label: "All Photos", count: all.length },
       { id: "redfish", label: "Redfish", count: countTitle("Redfish") },
-      { id: "grouper", label: "Grouper", count: countTitle("Grouper") },
+      { id: "grouper", label: "Grouper", count: countCategory("Grouper") },
       { id: "snook", label: "Snook", count: countTitle("Snook") },
       { id: "trout", label: "Speckled Trout", count: countTitle("Speckled Trout") },
       {
@@ -73,8 +73,8 @@ export default function Gallery() {
         count: all.filter(
           (i) =>
             i.category === "catches" &&
-            !["Redfish", "Grouper", "Snook", "Speckled Trout"].includes(i.title)
-        ).length,
+            !["Redfish", "Grouper", "Snook", "Speckled Trout"].includes(i.category)
+          ).length,
       },
       { id: "scalloping", label: "Scalloping", count: countCategory("scalloping") },
       { id: "wildlife", label: "Wildlife", count: countCategory("wildlife") },
@@ -86,16 +86,15 @@ export default function Gallery() {
 
     if (filter === "all") return all;
     if (filter === "redfish") return all.filter((img) => img.title === "Redfish");
-    if (filter === "grouper") return all.filter((img) => img.title === "Grouper");
+    if (filter === "grouper") return all.filter((img) => img.category === "Grouper");
     if (filter === "snook") return all.filter((img) => img.title === "Snook");
     if (filter === "trout") return all.filter((img) => img.title === "Speckled Trout");
-    if (filter === "other-fish")
-      return all.filter(
-        (img) =>
-          img.category === "catches" &&
-          !["Redfish", "Grouper", "Snook", "Speckled Trout"].includes(img.title)
-      );
-
+if (filter === "other-fish")
+  return all.filter(
+    (img) =>
+      img.category === "catches" &&
+      !["Redfish", "Grouper", "Snook", "Speckled Trout"].includes(img.category)
+  );
     // otherwise treat filter as category
     return all.filter((img) => img.category === filter);
   }, [filter, normalizedImages]);
