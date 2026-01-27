@@ -127,48 +127,47 @@ export default function Contact() {
               </CardContent>
             </Card>
             
-{/* What to Bring / What Not to Bring */}
-<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
-  
-  {/* WHAT TO BRING */}
-  <Card className="border border-green-200 bg-green-50 shadow-lg">
-    <CardContent className="p-6">
-      <h3 className="text-xl font-bold text-green-800 mb-4">
-        What to Bring
-      </h3>
-      <ul className="space-y-2 text-green-900 text-sm">
+<Card className="shadow-lg">
+  <CardContent className="p-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      
+      {/* WHAT TO BRING */}
+      <div className="border border-green-200 bg-green-50 rounded-lg p-6">
+        <h3 className="text-xl font-bold text-green-800 mb-4">
+          What to Bring
+        </h3>
+        <ul className="space-y-2 text-green-900 text-sm">
           <li>• Sunscreen</li>
           <li>• Sunglasses</li>
           <li>• Hat & lightweight clothing</li>
           <li>• Snacks & drinks</li>
           <li>• Motion sickness medication (if needed)</li>
         </ul>
-      </CardContent>
-    </Card>
+      </div>
 
-  {/* WHAT NOT TO BRING */}
-  <Card className="border border-red-200 bg-red-50 shadow-lg">
-    <CardContent className="p-6">
-      <h3 className="text-xl font-bold text-red-700 mb-4">
-         What NOT to Bring
-      </h3>
-      <ul className="space-y-2 text-red-900 text-sm">
-          <li>• Coolers (we've got one on the boat)</li>
+      {/* WHAT NOT TO BRING */}
+      <div className="border border-red-200 bg-red-50 rounded-lg p-6">
+        <h3 className="text-xl font-bold text-red-700 mb-4">
+          What NOT to Bring
+        </h3>
+        <ul className="space-y-2 text-red-900 text-sm">
+          <li>• Coolers (we’ve got one on the boat)</li>
           <li>• GPS devices</li>
-          <li>• Black-soled shoes (marking soles)</li>
+          <li>• Black-soled shoes</li>
           <li>• Illegal substances</li>
           <li>• Excessive valuables</li>
           <li>• Drones (unless discussed beforehand)</li>
         </ul>
-      </CardContent>
-    </Card>
-  </div>
+      </div>
 
-  <p className="text-center text-slate-600 mt-8 max-w-3xl mx-auto">
-    All rods, reels, bait, tackle, and safety equipment are provided.
-    Just show up ready to have a great time on the water.
-  </p>
-</div>
+    </div>
+
+    <p className="text-center text-slate-600 max-w-3xl mx-auto">
+      All rods, reels, bait, tackle, and safety equipment are provided.
+      Just show up ready to have a great time on the water.
+    </p>
+  </CardContent>
+</Card>
 
             <Card className="shadow-lg">
               <CardContent className="p-6">
