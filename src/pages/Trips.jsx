@@ -285,9 +285,9 @@ export default function Trips() {
                         Give us a call and we'll help you pick the perfect adventure based on your group, experience level, and what you want to catch.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="tel:+1XXXXXXXXXX">
+                        <a href="tel:+18139093901">
                             <Button size="lg" className="text-slate-900 font-semibold" style={{ backgroundColor: 'var(--brand-gold)' }}>
-                                Call Us: (XXX) XXX-XXXX
+                                Call Us: (813) 909-3901
                             </Button>
                         </a>
                         <Link to={createPageUrl('Contact')}>
