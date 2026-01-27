@@ -98,35 +98,7 @@ export default function Contact() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Contact Info Cards */}
-          <div className="space-y-6">
-            <Card className="shadow-lg">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div
-                    className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: "#E8F2FC" }}
-                  >
-                    <Phone size={24} style={{ color: "var(--brand-sky)" }} />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900 mb-1">Call or Text</h3>
-                    <p className="text-slate-600 text-sm mb-2">
-                      Leave a voicemail and we'll get back to you. Fastest way to book.
-                    </p>
-                    <a
-                      href="tel:+18139093901"
-                      className="font-semibold"
-                      style={{ color: "var(--brand-sky)" }}
-                    >
-                      (813) 909-3901
-                    </a>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
+
 <Card className="shadow-lg">
   <CardContent className="p-6">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -168,6 +140,36 @@ export default function Contact() {
     </p>
   </CardContent>
 </Card>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Contact Info Cards */}
+          <div className="space-y-6">
+            <Card className="shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div
+                    className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: "#E8F2FC" }}
+                  >
+                    <Phone size={24} style={{ color: "var(--brand-sky)" }} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-900 mb-1">Call or Text</h3>
+                    <p className="text-slate-600 text-sm mb-2">
+                      Leave a voicemail and we'll get back to you. Fastest way to book.
+                    </p>
+                    <a
+                      href="tel:+18139093901"
+                      className="font-semibold"
+                      style={{ color: "var(--brand-sky)" }}
+                    >
+                      (813) 909-3901
+                    </a>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
 
             <Card className="shadow-lg">
               <CardContent className="p-6">
