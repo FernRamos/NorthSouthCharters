@@ -64,17 +64,18 @@ export default function Gallery() {
     return [
       { id: "all", label: "All Photos", count: all.length },
       { id: "redfish", label: "Redfish", count: countTitle("Redfish") },
-      { id: "grouper", label: "Grouper", count: countCategory("Grouper") },
+      { id: "grouper", label: "Grouper", count: all.filter((i) => i.title?.includes("Grouper")).length, },
       { id: "snook", label: "Snook", count: countTitle("Snook") },
       { id: "trout", label: "Speckled Trout", count: countTitle("Speckled Trout") },
       {
         id: "other-fish",
         label: "Other Fish",
-        count: all.filter(
-  (i) =>
+      count: all.filter(
+       (i) =>
         i.category === "catches" &&
+        !i.title?.includes("Grouper") &&
         !["Redfish", "Snook", "Speckled Trout"].includes(i.title)
-      ).length,
+        ).length
       },
       { id: "scalloping", label: "Scalloping", count: countCategory("scalloping") },
       { id: "wildlife", label: "Wildlife", count: countCategory("wildlife") },
@@ -86,14 +87,15 @@ export default function Gallery() {
 
     if (filter === "all") return all;
     if (filter === "redfish") return all.filter((img) => img.title === "Redfish");
-    if (filter === "grouper") return all.filter((img) => img.category === "Grouper");
+    if (filter === "grouper") return all.filter((img) => img.title?.includes("Grouper"));
     if (filter === "snook") return all.filter((img) => img.title === "Snook");
     if (filter === "trout") return all.filter((img) => img.title === "Speckled Trout");
 if (filter === "other-fish")
   return all.filter(
     (img) =>
       img.category === "catches" &&
-      !["Redfish", "Snook", "Speckled Trout", "Grouper"].includes(img.title)
+      !img.title?.includes("Grouper") &&
+      !["Redfish", "Snook", "Speckled Trout"].includes(img.title)
   );
     // otherwise treat filter as category
     return all.filter((img) => img.category === filter);
