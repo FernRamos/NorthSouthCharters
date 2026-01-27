@@ -36,6 +36,14 @@ export default function Gallery() {
     return url;
   }, []);
 
+ // --- Helper: detect grouper by title OR filename (case-insensitive)
+  const isGrouper = (img) => {
+    const title = img.title?.toLowerCase() || "";
+    const url = img.url?.toLowerCase() || "";
+
+  return title.includes("grouper") || url.includes("grouper");
+};
+
   // Normalize your imported image arrays so the UI always uses correct paths
   const normalizedImages = useMemo(
     () =>
@@ -60,22 +68,24 @@ export default function Gallery() {
 
     const countTitle = (t) => all.filter((i) => i.title === t).length;
     const countCategory = (c) => all.filter((i) => i.category === c).length;
-
+ 
     return [
       { id: "all", label: "All Photos", count: all.length },
       { id: "redfish", label: "Redfish", count: countTitle("Redfish") },
-      { id: "grouper", label: "Grouper", count: all.filter((i) => i.title?.includes("Grouper")).length, },
+      { id: "grouper", label: "Grouper", count: all.filter(isGrouper).length,},
       { id: "snook", label: "Snook", count: countTitle("Snook") },
       { id: "trout", label: "Speckled Trout", count: countTitle("Speckled Trout") },
       {
         id: "other-fish",
         label: "Other Fish",
       count: all.filter(
-       (i) =>
-        i.category === "catches" &&
-        !i.title?.includes("Grouper") &&
-        !["Redfish", "Snook", "Speckled Trout"].includes(i.title)
-        ).length
+        (i) =>
+          i.category === "catches" &&
+          !isGrouper(i) &&
+          !["redfish", "snook", "speckled trout"].includes(
+            i.title?.toLowerCase() || ""
+        )
+      ).length
       },
       { id: "scalloping", label: "Scalloping", count: countCategory("scalloping") },
       { id: "wildlife", label: "Wildlife", count: countCategory("wildlife") },
@@ -87,16 +97,19 @@ export default function Gallery() {
 
     if (filter === "all") return all;
     if (filter === "redfish") return all.filter((img) => img.title === "Redfish");
-    if (filter === "grouper") return all.filter((img) => img.title?.includes("Grouper"));
+    if (filter === "grouper") return all.filter(isGrouper);
     if (filter === "snook") return all.filter((img) => img.title === "Snook");
     if (filter === "trout") return all.filter((img) => img.title === "Speckled Trout");
 if (filter === "other-fish")
-  return all.filter(
-    (img) =>
+  return all.filter((img) => {
+    const title = img.title?.toLowerCase() || "";
+
+    return (
       img.category === "catches" &&
-      !img.title?.includes("Grouper") &&
-      !["Redfish", "Snook", "Speckled Trout"].includes(img.title)
-  );
+      !isGrouper(img) &&
+      !["redfish", "snook", "speckled trout"].includes(title)
+    );
+  });
     // otherwise treat filter as category
     return all.filter((img) => img.category === filter);
   }, [filter, normalizedImages]);
