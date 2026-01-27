@@ -107,15 +107,15 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <div
-        className="relative min-h-[600px] bg-cover bg-center flex items-center pt-24 md:pt-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(/images/redfish9.jpeg)",
-          backgroundPosition: "center",
-        }}
-      >
+{/* Hero Section */}
+<div
+  className="relative min-h-[600px] bg-cover flex items-center pt-24 md:pt-0"
+  style={{
+    backgroundImage:
+      "linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(/images/redfish9.jpeg)",
+    backgroundPosition: "center 35%",
+  }}
+>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <img
             src="/images/logo-icon1.png"
