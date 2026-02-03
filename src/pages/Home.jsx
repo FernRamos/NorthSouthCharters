@@ -133,7 +133,10 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl mb-8 text-slate-200"
           >
+            Launching from Tarpon Springs — the southern gateway to Florida’s Nature Coast
+            <span className="block mt-2 text-lg md:text-xl text-slate-300">
             Island Hopping • Inshore • Nearshore • Scalloping • Family-Friendly Trips
+            </span>
           </motion.p>
 
           <motion.div
@@ -287,8 +290,8 @@ export default function Home() {
               Our Charter Experiences
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              From peaceful inshore fishing to thrilling nearshore adventures, we offer
-              unforgettable experiences for every skill level
+              From peaceful inshore fishing to thrilling nearshore adventures, our trips
+              explore the waters of Tarpon Springs — the southern gateway to Florida’s Nature Coast.
             </p>
           </div>
 
