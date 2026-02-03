@@ -107,7 +107,7 @@ export default function Trips() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h1 className="text-5xl font-bold mb-6">Our Charter Trips</h1>
                     <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-                        Choose from inshore fishing, nearshore adventures, seasonal scalloping, or relaxing island hopping trips in Crystal River, Tampa Bay, and Tarpon Springs.
+                        Choose from inshore fishing, nearshore adventures, seasonal scalloping, or relaxing island hopping trips in Florida's beautiful Nature Coast.
                     </p>
                 </div>
             </div>

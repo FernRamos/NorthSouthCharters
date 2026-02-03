@@ -204,12 +204,14 @@ export default function Contact() {
                     <MapPin size={24} style={{ color: "var(--brand-gold)" }} />
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-1">Launch Locations</h3>
-                    <ul className="text-slate-600 text-sm space-y-1">
-                      <li>• Crystal River</li>
-                      <li>• Tampa Bay</li>
-                      <li>• Tarpon Springs</li>
-                    </ul>
+                    <h3 className="font-bold text-slate-900 mb-1">Where We Launch</h3>
+                    <p className="text-slate-600 text-sm mb-2">
+                      All trips launch from Turtle Cove Marina in Tarpon Springs.
+                    </p>
+                    <p className="text-slate-600 text-sm">
+                      Exact meeting instructions will be confirmed after booking based on
+                      weather and trip type.
+                    </p>
                   </div>
                 </div>
               </CardContent>

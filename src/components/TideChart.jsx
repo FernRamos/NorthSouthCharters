@@ -12,11 +12,7 @@ import {
   ReferenceLine,
 } from "recharts";
 
-const STATIONS = {
-  "Crystal River": "8727333",
-  "Tampa Bay": "8726607",
-  "Tarpon Springs": "8726917",
-};
+const TARPON_SPRINGS_STATION = "8726917";;
 
 function formatTick(ts) {
   return new Date(ts).toLocaleTimeString([], {
@@ -25,8 +21,8 @@ function formatTick(ts) {
   });
 }
 
-export default function TideChart({ location = "Crystal River" }) {
-  const stationId = STATIONS[location] ?? STATIONS["Crystal River"];
+export default function TideChart() {
+  const stationId = TARPON_SPRINGS_STATION;
 
   const [loading, setLoading] = useState(true);
   const [tideData, setTideData] = useState([]);
@@ -98,7 +94,7 @@ export default function TideChart({ location = "Crystal River" }) {
       >
         <CardTitle className="flex items-center gap-2">
           <Waves size={28} />
-          NOAA Tide Chart — {location}
+          NOAA Tide Chart — Tarpon Springs
         </CardTitle>
       </CardHeader>
 
@@ -156,7 +152,7 @@ export default function TideChart({ location = "Crystal River" }) {
         )}
 
         <p className="text-xs text-slate-500 mt-4 text-center">
-          Data from NOAA Tides & Currents • Station {stationId}
+          Data from NOAA Tides & Currents • Tarpon Springs (Station 8726917)
         </p>
       </CardContent>
     </Card>

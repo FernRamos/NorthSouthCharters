@@ -11,7 +11,6 @@ import {
   Waves,
   Shell,
   Compass,
-  MapPin,
 } from "lucide-react";
 
 export default function Captains() {
@@ -29,13 +28,12 @@ export default function Captains() {
       name: "Captain Fernando Ramos Sr.",
       title: "Co-Founder & Lead Captain",
       yearsExperience: "15+",
-      favoriteCatch: "Redfish",
 
       // ✅ local images (public/images/...)
       image1: "/images/snook10.jpeg",
       image2: "/images/redfish19.jpeg",
 
-      bio: "Captain Fernando has been fishing the Nature Coast and Tampa Bay waters for over three decades. He knows these waters like the back of his hand. His passion for fishing started as a young boy, and he's been sharing that passion with anglers ever since. Captain Fernando is especially great with families and loves creating memorable experiences for first-time anglers.",
+      bio: "Captain Fernando has been fishing the Nature Coast waters for over two decades. He knows these waters like the back of his hand. His passion for fishing started as a young boy, and he's been sharing that passion with anglers ever since. Captain Fernando is especially great with families and loves creating memorable experiences for first-time anglers.",
       expertise: [
         "Inshore Fishing",
         "Flats Fishing",
@@ -50,13 +48,12 @@ export default function Captains() {
       philosophy:
         "Every trip is a chance to create lasting memories and respect for our beautiful waters.",
       tripTypes: ["Inshore Fishing", "Scalloping", "Island Hopping"],
-      locations: ["Crystal River", "Tampa Bay"],
+      favoriteCatch: "Redfish",
     },
     {
       name: "Captain Fernando Ramos Jr.",
       title: "Co-Founder & Captain",
       yearsExperience: "10+",
-      favoriteCatch: "Gag Grouper",
 
       // ✅ local images (public/images/...)
       image1: "/images/redfish14.jpeg",
@@ -76,7 +73,7 @@ export default function Captains() {
       philosophy:
         "Great fishing starts with respect for the ocean and the fish we pursue.",
       tripTypes: ["Inshore Fishing", "Nearshore Fishing", "Island Hopping"],
-      locations: ["Tampa Bay", "Tarpon Springs"],
+      favoriteCatch: "Gag Grouper",
     },
   ];
 
@@ -85,7 +82,7 @@ export default function Captains() {
       icon: Heart,
       title: "Our Purpose",
       description:
-        "We want every trip to be a great day on the water — and to keep Crystal River, Tampa Bay, and the Anclote area fishing healthy for the next generation.",
+        "We want every trip to be a great day on the water — and to keep the Nature Coast area fishing healthy for the next generation.",
     },
     {
       icon: Award,
@@ -114,8 +111,7 @@ export default function Captains() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl font-bold mb-6">Meet Your Captains</h1>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            Local experts with decades of combined experience on Crystal River
-            and Tampa Bay waters
+            Local experts with decades of combined experience in the Nature Coast waters
           </p>
         </div>
       </div>
@@ -200,25 +196,23 @@ export default function Captains() {
                     </div>
 
                     <div className="bg-white rounded-lg p-3">
-                      <h4 className="text-xs font-semibold text-slate-600 uppercase tracking-wide mb-2">
-                        Launch Locations
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {captain.locations.map((location, idx) => (
-                          <div
-                            key={idx}
-                            className="flex items-center gap-1 text-xs px-2 py-1 rounded"
-                            style={{
-                              backgroundColor: "#FEF3E2",
-                              color: "var(--brand-navy)",
-                            }}
-                          >
-                            <MapPin size={14} />
-                            <span>{location}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+  <h4 className="text-xs font-semibold text-slate-600 uppercase tracking-wide mb-2">
+    Favorite Fish to Catch
+  </h4>
+
+  <div className="flex items-center gap-2">
+    <div
+      className="flex items-center gap-1 text-xs px-2 py-1 rounded"
+      style={{
+        backgroundColor: "#E8F2FC",
+        color: "var(--brand-navy)",
+      }}
+    >
+      <Fish size={14} />
+      <span>{captain.favoriteCatch}</span>
+    </div>
+  </div>
+</div>
                   </div>
                 </div>
 

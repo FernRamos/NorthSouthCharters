@@ -59,7 +59,7 @@ export default function Home() {
     {
       icon: Fish,
       title: "Expert Captains",
-      description: "Decades of experience on Crystal River and Tampa Bay waters",
+      description: "Decades of experience in the Nature Coast waters",
     },
     {
       icon: Users,
@@ -70,11 +70,6 @@ export default function Home() {
       icon: Award,
       title: "Sustainable Fishing",
       description: "Following Florida regulations and responsible practices",
-    },
-    {
-      icon: MapPin,
-      title: "Multiple Locations",
-      description: "Crystal River, Tampa Bay, and Tarpon Springs",
     },
   ];
 
@@ -129,7 +124,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-5xl md:text-6xl font-bold mb-6"
           >
-            Nature Coast & Tampa Bay Charters
+            Nature Coast Charters
           </motion.h1>
 
           <motion.p

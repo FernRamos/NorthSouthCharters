@@ -8,56 +8,32 @@ import MapController from "../components/InteractiveMap";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
-// ✅ IMPORTANT:
-// Put your OpenWeatherMap key in a .env file as:
-// VITE_OWM_API_KEY=your_key_here
 const OWM_API_KEY = "9dc589a002537bec0e0f701720b675a1";
 
 export default function Locations() {
   const [loading, setLoading] = useState(true);
-  const [weatherData, setWeatherData] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState("crystal-river");
+  const [weatherData, setWeatherData] = useState(null);
   const [activeTab, setActiveTab] = useState("conditions");
-  const [mapCenter, setMapCenter] = useState([28.3, -82.5]);
-  const [mapZoom, setMapZoom] = useState(9);
+  const [mapCenter, setMapCenter] = useState([28.153194, -82.762229]);
+  const [mapZoom, setMapZoom] = useState(14);
 
-  const locations = useMemo(
-    () => [
-      {
-        id: "crystal-river",
-        name: "Crystal River",
-        label: "Crystal River Launch",
-        lat: 28.903462209723877,
-        lon: -82.63467354383404,
-        address: "12073 W Fort Island Trl, Crystal River, FL 34429-9215",
-        noaaStationId: "8727333",
-      },
-      {
-        id: "tampa-bay",
-        name: "Tampa Bay",
-        label: "Tampa Launch",
-        lat: 27.89240448830268,
-        lon: -82.53328635333908,
-        address: "5108 W Gandy Blvd, Tampa, FL 33611",
-        noaaStationId: "8726607",
-      },
-      {
-        id: "tarpon-springs",
-        name: "Tarpon Springs",
-        label: "Tarpon Springs Launch",
-        lat: 28.17626333833187,
-        lon: -82.78866363820713,
-        address: "1119 Baillies Bluff Rd, Holiday, FL 34691-9749",
-        noaaStationId: "8726917",
-      },
-    ],
+  /** ✅ SINGLE LAUNCH LOCATION **/
+  const location = useMemo(
+    () => ({
+      id: "tarpon-springs",
+      name: "Tarpon Springs",
+      label: "Turtle Cove Marina",
+      lat: 28.153193896065005,
+      lon: -82.76222948439958,
+      address: "827 Roosevelt Blvd, Tarpon Springs, FL 34689",
+      noaaStationId: "8726917",
+    }),
     []
   );
 
   const customIcon = useMemo(
     () =>
       L.icon({
-        // ✅ Use your OWN hosted icon (place it in /public/images/)
         iconUrl: "/images/logo-icon-no-words.png",
         iconSize: [40, 40],
         iconAnchor: [20, 40],
@@ -75,335 +51,189 @@ export default function Locations() {
     setLoading(true);
 
     try {
-      if (!OWM_API_KEY) {
-        console.error("Missing VITE_OWM_API_KEY. Add it to your .env file.");
-        setWeatherData(locations.map((loc) => ({ ...loc, weather: null })));
-        return;
-      }
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&appid=${OWM_API_KEY}&units=imperial`;
+      const res = await fetch(url);
+      const data = await res.json();
 
-      const results = await Promise.all(
-        locations.map(async (loc) => {
-          const url = `https://api.openweathermap.org/data/2.5/weather?lat=${loc.lat}&lon=${loc.lon}&appid=${OWM_API_KEY}&units=imperial`;
-
-          const res = await fetch(url);
-          if (!res.ok) throw new Error(`OWM failed (${res.status}) for ${loc.name}`);
-
-          const data = await res.json();
-
-          const weather = {
-            temperature: data?.main?.temp ?? null,
-            feels_like: data?.main?.feels_like ?? null,
-            humidity: data?.main?.humidity ?? null,
-            wind_speed: data?.wind?.speed ?? null,
-            description: data?.weather?.[0]?.description ?? "",
-            icon_code: data?.weather?.[0]?.icon ?? "",
-          };
-
-          return { ...loc, weather };
-        })
-      );
-
-      setWeatherData(results);
+      setWeatherData({
+        temperature: data?.main?.temp ?? null,
+        feels_like: data?.main?.feels_like ?? null,
+        humidity: data?.main?.humidity ?? null,
+        wind_speed: data?.wind?.speed ?? null,
+        description: data?.weather?.[0]?.description ?? "",
+        icon_code: data?.weather?.[0]?.icon ?? "",
+      });
     } catch (err) {
-      console.error("Error fetching weather:", err);
-      setWeatherData(locations.map((loc) => ({ ...loc, weather: null })));
+      console.error("Weather fetch error:", err);
+      setWeatherData(null);
     } finally {
       setLoading(false);
     }
   };
 
-  const selectedLocationData =
-    weatherData.find((loc) => loc.id === selectedLocation) ||
-    locations.find((loc) => loc.id === selectedLocation);
-
-  useEffect(() => {
-    if (selectedLocationData) {
-      setMapCenter([selectedLocationData.lat, selectedLocationData.lon]);
-      setMapZoom(12);
-    }
-  }, [selectedLocationData]);
-
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Hero */}
       <div className="bg-gradient-to-br from-blue-900 to-slate-800 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold mb-6">Launch Locations & Conditions</h1>
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h1 className="text-5xl font-bold mb-6">Where We Launch</h1>
           <p className="text-xl text-blue-100">
-            Three convenient locations with real-time weather and tide information
+            Our trips depart from Turtle Cove Marina in Tarpon Springs
           </p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Map */}
-        <Card className="shadow-xl mb-8 overflow-hidden">
-          <div className="h-[500px] w-full">
-            <MapContainer center={[28.3, -82.5]} zoom={9} style={{ height: "100%", width: "100%" }}>
+        <Card className="shadow-xl mb-10 overflow-hidden">
+          <div className="h-[450px] w-full">
+            <MapContainer center={mapCenter} zoom={mapZoom} style={{ height: "100%", width: "100%" }}>
               <MapController center={mapCenter} zoom={mapZoom} />
               <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution='&copy; OpenStreetMap contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              {locations.map((location) => (
-                <Marker key={location.id} position={[location.lat, location.lon]} icon={customIcon}>
-                  <Popup>
-                    <div className="p-2">
-                      <h3 className="font-bold text-lg mb-2">{location.label}</h3>
-                      <p className="text-sm text-slate-600 mb-2">{location.address}</p>
-                      <button
-                        onClick={() => setSelectedLocation(location.id)}
-                        className="text-blue-600 hover:underline text-sm block mb-1"
-                      >
-                        View Details →
-                      </button>
-                      <a
-                        href={`https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lon}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:underline text-sm inline-block"
-                      >
-                        Get Directions →
-                      </a>
-                    </div>
-                  </Popup>
-                </Marker>
-              ))}
+              <Marker position={[location.lat, location.lon]} icon={customIcon}>
+                <Popup>
+                  <div className="p-2">
+                    <h3 className="font-bold text-lg">{location.label}</h3>
+                    <p className="text-sm text-slate-600 mb-2">{location.address}</p>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lon}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline text-sm"
+                    >
+                      Get Directions →
+                    </a>
+                  </div>
+                </Popup>
+              </Marker>
             </MapContainer>
           </div>
         </Card>
 
-        {/* Location Selection */}
-        <div className="mb-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {locations.map((location) => (
-              <button
-                key={location.id}
-                onClick={() => setSelectedLocation(location.id)}
-                className={`p-4 rounded-lg border-2 transition-all ${
-                  selectedLocation === location.id
-                    ? "border-sky-500 bg-blue-50"
-                    : "border-slate-200 bg-white hover:border-slate-300"
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <MapPin
-                    size={24}
-                    style={{ color: selectedLocation === location.id ? "var(--brand-sky)" : "#64748b" }}
-                  />
-                  <span
-                    className={`font-semibold ${
-                      selectedLocation === location.id ? "text-slate-900" : "text-slate-600"
-                    }`}
-                  >
-                    {location.name}
-                  </span>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
+        {/* About Turtle Cove */}
+        <Card className="mb-10">
+          <CardContent className="p-6">
+            <h3 className="text-2xl font-bold mb-3">About Turtle Cove</h3>
+            <p className="text-slate-700 leading-relaxed">
+              Turtle Cove Marina is a quiet, well-maintained launch point in Tarpon Springs
+              that offers fast access to productive inshore flats, nearshore Gulf waters,
+              and nearby islands. Its protected waterways allow for smooth departures while
+              maximizing time spent fishing instead of running long distances.
+            </p>
+          </CardContent>
+        </Card>
 
         {/* Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-2 mb-8">
-            <TabsTrigger value="conditions" className="text-base">
+            <TabsTrigger value="conditions">
               <Cloud size={16} className="mr-2" />
-              Current Conditions
+              Conditions
             </TabsTrigger>
-            <TabsTrigger value="launch" className="text-base">
+            <TabsTrigger value="launch">
               <Navigation size={16} className="mr-2" />
               Launch Details
             </TabsTrigger>
           </TabsList>
 
-          {/* Conditions Tab */}
+          {/* Conditions */}
           <TabsContent value="conditions">
-            {loading ? (
-              <div className="text-center py-12">
-                <div
-                  className="inline-block animate-spin rounded-full h-12 w-12 border-b-2"
-                  style={{ borderBottomColor: "var(--brand-sky)" }}
-                />
-                <p className="mt-4 text-slate-600">Loading conditions...</p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Weather Card */}
-                {selectedLocationData?.weather ? (
-                  <Card className="shadow-lg">
-                    <CardHeader
-                      className="text-white"
-                      style={{ background: "linear-gradient(to right, var(--brand-sky), var(--brand-sky-soft))" }}
-                    >
-                      <CardTitle className="flex items-center gap-2">
-                        <Cloud size={28} />
-                        Current Weather
-                      </CardTitle>
-                    </CardHeader>
-
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between mb-6">
-                        <div>
-                          <div className="text-5xl font-bold text-slate-900">
-                            {Math.round(selectedLocationData.weather.temperature)}°F
-                          </div>
-                          <p className="text-lg text-slate-600 capitalize mt-2">
-                            {selectedLocationData.weather.description}
-                          </p>
-                        </div>
-
-                        {selectedLocationData.weather.icon_code && (
-                          <img
-                            src={`https://openweathermap.org/img/wn/${selectedLocationData.weather.icon_code}@2x.png`}
-                            alt="Weather icon"
-                            className="w-24 h-24"
-                          />
-                        )}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Weather */}
+              <Card>
+                <CardHeader className="text-white" style={{ background: "linear-gradient(to right, var(--brand-sky), var(--brand-sky-soft))" }}>
+                  <CardTitle>Current Weather</CardTitle>
+                </CardHeader>
+                <CardContent className="p-6">
+                  {loading ? (
+                    <p>Loading weather…</p>
+                  ) : weatherData ? (
+                    <>
+                      <div className="text-5xl font-bold mb-2">
+                        {Math.round(weatherData.temperature)}°F
                       </div>
+                      <p className="capitalize text-slate-600 mb-6">
+                        {weatherData.description}
+                      </p>
 
                       <div className="grid grid-cols-2 gap-4">
-                        <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
-                          <Wind size={24} style={{ color: "var(--brand-sky)" }} />
-                          <div>
-                            <div className="text-sm text-slate-600">Wind</div>
-                            <div className="font-semibold text-slate-900">
-                              {Math.round(selectedLocationData.weather.wind_speed)} mph
-                            </div>
-                          </div>
+                        <div className="flex items-center gap-3">
+                          <Wind /> {Math.round(weatherData.wind_speed)} mph
                         </div>
-
-                        <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
-                          <Droplets size={24} style={{ color: "var(--brand-sky)" }} />
-                          <div>
-                            <div className="text-sm text-slate-600">Humidity</div>
-                            <div className="font-semibold text-slate-900">
-                              {Math.round(selectedLocationData.weather.humidity)}%
-                            </div>
-                          </div>
+                        <div className="flex items-center gap-3">
+                          <Droplets /> {weatherData.humidity}%
                         </div>
-
-                        <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg col-span-2">
-                          <Eye size={24} style={{ color: "var(--brand-sky)" }} />
-                          <div>
-                            <div className="text-sm text-slate-600">Feels Like</div>
-                            <div className="font-semibold text-slate-900">
-                              {Math.round(selectedLocationData.weather.feels_like)}°F
-                            </div>
-                          </div>
+                        <div className="flex items-center gap-3 col-span-2">
+                          <Eye /> Feels like {Math.round(weatherData.feels_like)}°F
                         </div>
                       </div>
+                    </>
+                  ) : (
+                    <p>Weather unavailable</p>
+                  )}
+                </CardContent>
+              </Card>
 
-                      <div
-                        className="mt-6 p-4 rounded-lg"
-                        style={{ backgroundColor: "#E8F2FC", border: "1px solid var(--brand-sky-soft)" }}
-                      >
-                        <p className="text-sm" style={{ color: "var(--brand-navy)" }}>
-                          <span className="font-semibold">Fishing Tip:</span>{" "}
-                          {selectedLocationData.weather.wind_speed < 10
-                            ? "Great conditions for fishing! Light winds make for a comfortable day."
-                            : selectedLocationData.weather.wind_speed < 20
-                            ? "Moderate winds — still fishable but waves may be choppy."
-                            : "High winds — we may need to adjust plans or reschedule for safety."}
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ) : (
-                  <Card className="shadow-lg">
-                    <CardHeader
-                      className="text-white"
-                      style={{ background: "linear-gradient(to right, var(--brand-sky), var(--brand-sky-soft))" }}
-                    >
-                      <CardTitle className="flex items-center gap-2">
-                        <Cloud size={28} />
-                        Current Weather
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-6">
-                      <p className="text-slate-600">
-                        Weather is unavailable right now (missing API key or request failed).
-                      </p>
-                      <p className="text-sm text-slate-500 mt-2">
-                        Add <code>VITE_OWM_API_KEY</code> to your <code>.env</code>.
-                      </p>
-                    </CardContent>
-                  </Card>
-                )}
-
-                {/* Tide Chart (make sure TideChart is NOAA-direct) */}
-                <TideChart location={selectedLocationData?.name} />
-              </div>
-            )}
-
-            {/* Weather Info Card */}
-            <Card className="mt-8" style={{ backgroundColor: "#FEF3E2", borderColor: "var(--brand-gold)" }}>
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div
-                    className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: "var(--brand-gold)" }}
-                  >
-                    <Cloud className="text-white" size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900 text-lg mb-2">Weather-Dependent Trips</h3>
-                    <p className="text-slate-700">
-                      Your safety is our priority. We monitor conditions closely and will contact you if we
-                      need to reschedule due to weather. For nearshore trips, we need calm seas and good
-                      visibility. Inshore trips can run in a wider range of conditions.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+              {/* Tide Chart – unchanged */}
+              <TideChart location={location.name} />
+            </div>
           </TabsContent>
 
-          {/* Launch Details Tab */}
+          {/* Launch Details */}
           <TabsContent value="launch">
-            <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MapPin /> Turtle Cove Marina
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <p className="text-lg mb-4">{location.address}</p>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lon}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white"
+                  style={{ backgroundColor: "var(--brand-sky)" }}
+                >
+                  <Navigation size={18} />
+                  Get Directions
+                </a>
+              </CardContent>
+            </Card>
               <Card className="shadow-lg">
                 <CardHeader
                   className="text-white"
-                  style={{ background: "linear-gradient(to right, var(--brand-sky), var(--brand-sky-soft))" }}
+                  style={{
+                    background: "linear-gradient(to right, var(--brand-gold), var(--brand-gold-deep))",
+                  }}
                 >
-                  <CardTitle className="flex items-center gap-2">
-                    <MapPin size={28} />
-                    {selectedLocationData?.label}
-                  </CardTitle>
+                  <CardTitle>Parking & Arrival Tips</CardTitle>
                 </CardHeader>
-                <CardContent className="p-6">
-                  <p className="text-slate-600 text-lg mb-4">{selectedLocationData?.address}</p>
-                  <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${selectedLocationData?.lat},${selectedLocationData?.lon}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-white hover:opacity-90 transition"
-                    style={{ backgroundColor: "var(--brand-sky)" }}
-                  >
-                    <Navigation size={18} />
-                    Get Directions
-                  </a>
+
+                <CardContent className="p-6 space-y-4 text-slate-700">
+                 <p>
+                   Parking is available near Turtle Cove Marina. Please arrive
+                   <span className="font-semibold"> 10–15 minutes early</span> to allow time
+                    for parking, loading gear, and meeting your captain.
+                 </p>
+
+                  <ul className="list-disc pl-5 space-y-2">
+                 <li>Park only in designated marina or public parking areas</li>
+                 <li>Bring only what you need — storage space is limited</li>
+                 <li>Restrooms may be limited, plan ahead</li>
+                </ul>
+
+               <p className="text-sm text-slate-600">
+                Final meeting instructions will be confirmed after booking based on
+                weather and trip type.
+                </p>
                 </CardContent>
               </Card>
 
-              <Card style={{ backgroundColor: "#E8F2FC", borderColor: "var(--brand-sky-soft)" }}>
-                <CardContent className="p-6">
-                  <h3 className="font-bold text-lg mb-3" style={{ color: "var(--brand-navy)" }}>
-                    Meeting Your Captain
-                  </h3>
-                  <p className="text-slate-700 mb-4">
-                    When you book your trip, we'll confirm the best launch location based on your preferred
-                    fishing area, weather conditions, and what you want to catch. We'll provide exact meeting
-                    instructions and the captain's contact info before your trip.
-                  </p>
-                  <p className="text-slate-700">
-                    <span className="font-semibold">Tip:</span> Arrive 10–15 minutes early to load gear, use
-                    facilities, and get ready for an amazing day on the water!
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
           </TabsContent>
         </Tabs>
       </div>

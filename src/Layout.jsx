@@ -18,7 +18,7 @@ export default function Layout({ children, currentPageName }) {
       { name: "Trips", path: "Trips" },
       { name: "Captains", path: "Captains" },
       { name: "Gallery", path: "Gallery" },
-      { name: "Locations", path: "Locations" },
+      { name: "Where We Launch", path: "Locations" },
       { name: "Book Now", path: "Contact", highlight: true },
     ],
     []
@@ -83,7 +83,7 @@ export default function Layout({ children, currentPageName }) {
                   <Link
                     key={link.path}
                     to={createPageUrl(link.path)}
-                    className={`px-4 py-2 rounded-lg transition-all ${classes}`}
+                    className={`px-3 py-2 rounded-lg transition-all whitespace-nowrap ${classes}`}
                     style={link.highlight ? { backgroundColor: "var(--brand-gold)" } : {}}
                   >
                     {link.name}
@@ -148,7 +148,7 @@ export default function Layout({ children, currentPageName }) {
                 className="h-16 mb-4"
               />
               <p className="text-sm">
-                Nature Coast and Tampa Bay fishing charters. Family-friendly trips, inshore,
+                Nature Coast Charters. Family-friendly trips, inshore,
                 nearshore, scalloping, and island hopping adventures.
               </p>
             </div>
