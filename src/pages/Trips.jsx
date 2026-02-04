@@ -16,7 +16,7 @@ export default function Trips() {
             icon: Fish,
             tagline: 'Calm waters, consistent action',
             description: 'Fish calm flats and mangroves for redfish, trout, snook, and more. Smooth waters and light tackle make this perfect for all skill levels.',
-            image: 'https://www.nscharters.com/images/snook10.jpeg',
+            image: 'https://www.nscharters.com/images/snook10.webp',
             pricing: {
                 halfDay: { duration: '4 hours', price: 475 },
                 fullDay: { duration: '6 hours', price: 600 }
@@ -38,7 +38,7 @@ export default function Trips() {
             icon: Waves,
             tagline: 'Bigger fights, more variety',
             description: 'Head just off the coast for stronger fights and more variety. Perfect for anglers looking for more action without going offshore.',
-            image: 'https://www.nscharters.com/images/grouper1.jpeg',
+            image: 'https://www.nscharters.com/images/grouper1.webp',
             pricing: {
                 halfDay: { duration: '4 hours', price: 550 },
                 fullDay: { duration: '8 hours', price: 750 }
@@ -60,7 +60,7 @@ export default function Trips() {
             icon: Shell,
             tagline: 'Family-friendly fun',
             description: 'Seasonal adventure in the Nature Coast\'s shallow waters. Snorkel, swim, and harvest fresh scallops - easy and fun for the whole family.',
-            image: 'https://www.nscharters.com/images/scallop1.jpeg',
+            image: 'https://www.nscharters.com/images/scallop1.webp',
             pricing: {
                 halfDay: { duration: '4 hours', price: 400 }
             },
@@ -81,7 +81,7 @@ export default function Trips() {
             icon: Compass,
             tagline: 'Relax and explore',
             description: 'Explore local islands and sandbars. Perfect for swimming, snorkeling, shelling, and enjoying a laid-back day on the water.',
-            image: 'https://www.nscharters.com/images/shark1.jpeg',
+            image: 'https://www.nscharters.com/images/shark1.webp',
             pricing: {
                 halfDay: { duration: '4 hours', price: 375 },
                 fullDay: { duration: '6 hours', price: 525 }

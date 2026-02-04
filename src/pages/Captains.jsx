@@ -30,8 +30,8 @@ export default function Captains() {
       yearsExperience: "15+",
 
       // ✅ local images (public/images/...)
-      image1: "/images/snook10.jpeg",
-      image2: "/images/redfish19.jpeg",
+      image1: "/images/snook10.webp",
+      image2: "/images/redfish19.webp",
 
       bio: "Captain Fernando has been fishing the Nature Coast waters for over two decades. He knows these waters like the back of his hand. His passion for fishing started as a young boy, and he's been sharing that passion with anglers ever since. Captain Fernando is especially great with families and loves creating memorable experiences for first-time anglers.",
       expertise: [
@@ -56,8 +56,8 @@ export default function Captains() {
       yearsExperience: "10+",
 
       // ✅ local images (public/images/...)
-      image1: "/images/redfish14.jpeg",
-      image2: "/images/grouper16.jpeg",
+      image1: "/images/redfish14.webp",
+      image2: "/images/grouper16.webp",
 
       bio: "Growing up on the water with his father, Captain Fernando Jr. developed his skills from an early age. He specializes in nearshore fishing and loves the challenge of bigger, harder-fighting fish. USCG licensed and CPR/First Aid certified, he combines safety with excitement to deliver unforgettable trips. His enthusiasm is contagious, and he's great at teaching technique to anglers of all levels.",
       expertise: [

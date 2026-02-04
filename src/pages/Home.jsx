@@ -77,25 +77,25 @@ export default function Home() {
     {
       title: "Inshore Fishing",
       description: "Target redfish, snook, and trout in calm flats and mangroves",
-      image: "/images/redfish19.jpeg",
+      image: "/images/redfish19.webp",
       duration: "4-6 hours",
     },
     {
       title: "Nearshore Fishing",
       description: "Bigger fights just off the coast with grouper and more",
-      image: "/images/grouper16.jpeg",
+      image: "/images/grouper16.webp",
       duration: "4-8 hours",
     },
     {
       title: "Scalloping",
       description: "Seasonal family fun snorkeling for fresh scallops",
-      image: "/images/scallop1.jpeg",
+      image: "/images/scallop1.webp",
       duration: "4 hours",
     },
     {
       title: "Island Hopping",
       description: "Explore local islands, sandbars, and swim spots",
-      image: "/images/manatee1.jpeg",
+      image: "/images/manatee1.webp",
       duration: "4-6 hours",
     },
   ];
@@ -107,7 +107,7 @@ export default function Home() {
   className="relative min-h-[85vh] md:min-h-[600px] bg-cover bg-no-repeat bg-center flex items-center pt-20 md:pt-0"
   style={{
     backgroundImage:
-      "linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(/images/redfish9.jpeg)",
+      "linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(/images/redfish9.webp)",
   }}
 >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
