@@ -7,15 +7,30 @@ import TideChart from "../components/TideChart";
 import MapController from "../components/InteractiveMap";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { useMap } from "react-leaflet";
 
 const OWM_API_KEY = "9dc589a002537bec0e0f701720b675a1";
+
+function FitBounds({ bounds }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!bounds || bounds.length === 0) return;
+
+    map.fitBounds(bounds, {
+      padding: [60, 60],
+      maxZoom: 16,
+    });
+  }, [bounds, map]);
+
+  return null;
+}
 
 export default function Locations() {
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState(null);
   const [activeTab, setActiveTab] = useState("conditions");
-  const [mapCenter, setMapCenter] = useState([28.153194, -82.762229]);
-  const [mapZoom, setMapZoom] = useState(14);
+
 
   /** ✅ SINGLE LAUNCH LOCATION **/
   const location = useMemo(
@@ -31,6 +46,38 @@ export default function Locations() {
     []
   );
 
+const parkingLocations = [
+  {
+    id: "main-lot",
+    name: "Closest Marina Parking",
+    lat: 28.153443404258,
+    lon: -82.76240305603818,
+    note: "Closest parking to the docks",
+  },
+  {
+    id: "street-parking",
+    name: "Street Parking",
+    lat: 28.153679093088087,
+    lon: -82.76184236469713,
+    note: "Free street parking within short walking distance",
+  },
+  {
+    id: "corner-parking",
+    name: "Around-the-Corner Parking",
+    lat: 28.153799701080622,
+    lon: -82.76292865932258,
+    note: "Good backup option if nearby spots are full",
+  },
+];
+
+const bounds = useMemo(
+  () => [
+    [location.lat, location.lon],
+    ...parkingLocations.map((p) => [p.lat, p.lon]),
+  ],
+  [location, parkingLocations]
+);
+
   const customIcon = useMemo(
     () =>
       L.icon({
@@ -41,6 +88,15 @@ export default function Locations() {
       }),
     []
   );
+
+  const parkingIcon = useMemo(
+  () =>
+    L.divIcon({
+      html: "🅿️",
+      className: "text-2xl",
+    }),
+  []
+);
 
   useEffect(() => {
     fetchWeather();
@@ -85,13 +141,21 @@ export default function Locations() {
 
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Map */}
-        <Card className="shadow-xl mb-10 overflow-hidden">
+        <Card className="rounded-xl shadow-xl mb-10 overflow-hidden">
           <div className="h-[450px] w-full">
-            <MapContainer center={mapCenter} zoom={mapZoom} style={{ height: "100%", width: "100%" }}>
-              <MapController center={mapCenter} zoom={mapZoom} />
+              <MapContainer 
+                bounds={bounds} style={{ height: "100%", width: "100%" }}> 
+              <FitBounds bounds={bounds} />
+             
+              {/* Satellite imagery */}
               <TileLayer
-                attribution='&copy; OpenStreetMap contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution="Tiles © Esri"
+                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+              />
+              {/* Labels overlay */}
+              <TileLayer
+                attribution="Labels © Esri"
+                url="https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
               />
               <Marker position={[location.lat, location.lon]} icon={customIcon}>
                 <Popup>
@@ -109,8 +173,32 @@ export default function Locations() {
                   </div>
                 </Popup>
               </Marker>
+
+              {parkingLocations.map((spot) => (
+  <Marker
+    key={spot.id}
+    position={[spot.lat, spot.lon]}
+    icon={parkingIcon}
+  >
+    <Popup>
+      <div className="p-2">
+        <h4 className="font-semibold">{spot.name}</h4>
+        <p className="text-sm text-slate-600 mb-2">{spot.note}</p>
+        <a
+          href={`https://www.google.com/maps/search/?api=1&query=${spot.lat},${spot.lon}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:underline text-sm"
+        >
+          Open in Google Maps →
+        </a>
+      </div>
+    </Popup>
+  </Marker>
+))}
+
             </MapContainer>
-          </div>
+          </div> 
         </Card>
 
         {/* About Turtle Cove */}
@@ -143,8 +231,8 @@ export default function Locations() {
           <TabsContent value="conditions">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Weather */}
-              <Card>
-                <CardHeader className="text-white" style={{ background: "linear-gradient(to right, var(--brand-sky), var(--brand-sky-soft))" }}>
+              <Card className="rounded-xl overflow-hidden shadow-lg mb-6">
+                <CardHeader className="text-white rounded-t-xl" style={{ background: "linear-gradient(to right, var(--brand-sky), var(--brand-sky-soft))" }}>
                   <CardTitle>Current Weather</CardTitle>
                 </CardHeader>
                 <CardContent className="p-6">
@@ -184,12 +272,17 @@ export default function Locations() {
 
           {/* Launch Details */}
           <TabsContent value="launch">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <MapPin /> Turtle Cove Marina
-                </CardTitle>
-              </CardHeader>
+            <Card className="rounded-xl overflow-hidden shadow-lg mt-8">
+              <CardHeader
+                className="text-white"
+                style={{
+                  background: "linear-gradient(to right, var(--brand-sky), var(--brand-sky-soft))",
+                }}
+            >
+             <CardTitle className="flex items-center gap-2">
+              <MapPin /> Turtle Cove Marina
+             </CardTitle>
+            </CardHeader>
               <CardContent className="p-6">
                 <p className="text-lg mb-4">{location.address}</p>
                 <a
@@ -204,7 +297,7 @@ export default function Locations() {
                 </a>
               </CardContent>
             </Card>
-              <Card className="shadow-lg">
+              <Card className="rounded-xl overflow-hidden shadow-lg mt-8">
                 <CardHeader
                   className="text-white"
                   style={{
@@ -223,7 +316,6 @@ export default function Locations() {
 
                   <ul className="list-disc pl-5 space-y-2">
                  <li>Park only in designated marina or public parking areas</li>
-                 <li>Bring only what you need — storage space is limited</li>
                  <li>Restrooms may be limited, plan ahead</li>
                 </ul>
 

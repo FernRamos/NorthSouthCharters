@@ -54,20 +54,28 @@ export default function Layout({ children, currentPageName }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <Link to={createPageUrl("Home")} className="flex items-center space-x-3">
-              <img
-                src={img("/images/logo-icon-no-words.png")}
-                alt="North South Charters logo"
-                className="h-12 w-12"
-              />
-              <div className="hidden sm:block">
-                <img
-                  src={img("/images/logo-text.png")}
-                  alt="North South Charters"
-                  className="h-10"
-                />
-              </div>
-            </Link>
+            <Link to={createPageUrl("Home")} className="flex items-center">
+  {/* Mobile: FULL logo */}
+  <img
+    src={img("/images/logo-horizontal.png")}
+    alt="North South Charters"
+    className="h-12 block md:hidden"
+  />
+
+  {/* Desktop: icon + text */}
+  <div className="hidden md:flex items-center space-x-3">
+    <img
+      src={img("/images/logo-icon-no-words.png")}
+      alt="North South Charters icon"
+      className="h-12 w-12"
+    />
+    <img
+      src={img("/images/logo-text.png")}
+      alt="North South Charters"
+      className="h-10"
+    />
+  </div>
+</Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">

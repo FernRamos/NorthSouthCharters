@@ -87,9 +87,9 @@ export default function TideChart() {
   const nowTs = Date.now();
 
   return (
-    <Card className="shadow-lg">
+    <Card className="rounded-xl overflow-hidden shadow-lg">
       <CardHeader
-        className="text-white"
+        className="rounded-t-xl text-white"
         style={{ background: "linear-gradient(to right, #14B8A6, #0D9488)" }}
       >
         <CardTitle className="flex items-center gap-2">

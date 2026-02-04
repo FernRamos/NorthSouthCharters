@@ -104,25 +104,24 @@ export default function Home() {
     <div className="min-h-screen">
 {/* Hero Section */}
 <div
-  className="relative min-h-[600px] bg-[length:120%] md:bg-cover flex items-center pt-24 md:pt-0"
+  className="relative min-h-[85vh] md:min-h-[600px] bg-cover bg-no-repeat bg-center flex items-center pt-20 md:pt-0"
   style={{
     backgroundImage:
       "linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(/images/redfish9.jpeg)",
-    backgroundPosition: "center 40%",
   }}
 >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <img
             src="/images/logo-icon1.png"
             alt="North South Charters"
-            className="mx-auto mb-8 w-32 h-32"
+            className="mx-auto mb-4 w-20 h-20 md:w-32 md:h-32"
           />
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-6xl font-bold mb-6"
+            className="text-4xl md:text-6xl font-bold mb-4 leading-tight"
           >
             Nature Coast Charters
           </motion.h1>
@@ -131,11 +130,14 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl mb-8 text-slate-200"
+            className="text-lg md:text-2xl mb-6 text-slate-200"
           >
-            Launching from Tarpon Springs — the southern gateway to Florida’s Nature Coast
-            <span className="block mt-2 text-lg md:text-xl text-slate-300">
-            Island Hopping • Inshore • Nearshore • Scalloping • Family-Friendly Trips
+            Launching from Tarpon Springs
+            <span className="block text-sm md:text-base opacity-80">
+              The southern gateway to Florida’s Nature Coast
+            </span>
+            <span className="hidden md:block mt-2 text-lg text-slate-300">
+              Island Hopping • Inshore • Nearshore • Scalloping • Family-Friendly Trips
             </span>
           </motion.p>
 
@@ -143,7 +145,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex items-center justify-center gap-6 mb-8 flex-wrap"
+            className="flex items-center justify-center gap-3 md:gap-6 mb-6 flex-wrap"
           >
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
               <Star className="text-yellow-400" size={20} />
