@@ -44,7 +44,6 @@ export const images = [
     { url: 'https://www.nscharters.com/images/redfish20.webp', category: 'catches', title: 'Redfish' },
     { url: 'https://www.nscharters.com/images/redfish21.webp', category: 'catches', title: 'Redfish' },
     { url: 'https://www.nscharters.com/images/redfish22.webp', category: 'catches', title: 'Redfish' },
-    { url: 'https://www.nscharters.com/images/redfish23.webp', category: 'catches', title: 'Redfish' },
     { url: 'https://www.nscharters.com/images/snook1.webp', category: 'catches', title: 'Snook' },
     { url: 'https://www.nscharters.com/images/snook2.webp', category: 'catches', title: 'Snook' },
     { url: 'https://www.nscharters.com/images/snook3.webp', category: 'catches', title: 'Snook' },
