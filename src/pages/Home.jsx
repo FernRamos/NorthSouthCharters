@@ -71,6 +71,12 @@ export default function Home() {
       title: "Sustainable Fishing",
       description: "Following Florida regulations and responsible practices",
     },
+    {
+    icon: MapPin,
+    title: "Local Launch (Tarpon Springs)",
+    description:
+      "Meeting time and exact launch details are confirmed after booking based on conditions",
+    },
   ];
 
   const trips = [
