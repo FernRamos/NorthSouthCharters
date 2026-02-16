@@ -99,70 +99,97 @@ export default function Trips() {
         },
          // ✅ Combo Trips (Premium)
         {
-            id: 'combo_inshore_island',
-            title: 'Inshore + Island Combo',
-            icon: Compass,
-            tagline: 'Fish early, relax later',
-            description: 'Start with inshore fishing, then cool down with island hopping and swimming.',
-            image: 'https://www.nscharters.com/images/redfish12.webp',
+            id: "combo_inshore_nearshore",
+            title: "Inshore + Nearshore Combo",
+            icon: Waves,
+            tagline: "Double the action",
+            description:
+                "Start inshore for steady bites, then switch it up with nearshore fishing for bigger fights and variety.",
+            image: "https://www.nscharters.com/images/grouper4.webp",
             pricing: {
-                fullDay: { duration: '6 hours', price: 750 }
+            fullDay: { duration: "8 hours", price: 950 },
             },
             maxGuests: 4,
             includes: [
-                'All fishing gear and tackle',
-                'Bait and lures',
-                'Fishing licenses',
-                'Ice and cooler',
-                'Fish cleaning',
-                'Island / sandbar stop'
+                "All fishing gear and tackle",
+                "Bait and lures",
+                "Fishing licenses",
+                "Ice and cooler",
+                "Fish cleaning",
             ],
-            targetSpecies: ['Redfish', 'Snook', 'Speckled Trout'],
-            bestSeasons: 'Year-round'
-        },
-        {
-            id: 'combo_nearshore_island',
-            title: 'Nearshore + Island Combo',
+            targetSpecies: ["Redfish", "Snook", "Speckled Trout", "Gag Grouper", "Snapper"],
+            bestSeasons: "Late summer to Spring (weather dependent)",
+            },
+            {
+            id: "combo_island_inshore",
+            title: "Island + Inshore Combo",
             icon: Compass,
-            tagline: 'Big fish + beach vibes',
-            description: 'Chase nearshore species, then unwind with a relaxing island stop.',
-            image: 'https://www.nscharters.com/images/grouper4.webp',
+            tagline: "Relax + reel in fish",
+            description:
+                "Enjoy island time and sandbar vibes, then finish with inshore fishing (or fish first, then chill).",
+            image: "https://www.nscharters.com/images/redfish12.webp",
             pricing: {
-                fullDay: { duration: '8 hours', price: 900 }
+            fullDay: { duration: "6 hours", price: 750 },
             },
             maxGuests: 4,
             includes: [
-                'All fishing gear and tackle',
-                'Bait and lures',
-                'Fishing licenses',
-                'Ice and cooler',
-                'Fish cleaning',
-                'Island / sandbar stop'
+                "All fishing gear and tackle",
+                "Bait and lures",
+                "Fishing licenses",
+                "Ice and cooler",
+                "Fish cleaning",
+                "Island / sandbar stop",
             ],
-            targetSpecies: ['Gag Grouper', 'Mangrove Snapper', 'Cobia'],
-            bestSeasons: 'Late summer to Spring'
+            targetSpecies: ["Redfish", "Snook", "Speckled Trout"],
+            bestSeasons: "Year-round",
+            },
+            {
+            id: "combo_scallop_inshore",
+            title: "Scalloping + Inshore Combo",
+            icon: Shell,
+            tagline: "Harvest + hook up",
+            description:
+                "Scallop in the morning and finish the day with inshore fishing for a full Nature Coast experience.",
+            image: "https://www.nscharters.com/images/scallop1.webp",
+            pricing: {
+            fullDay: { duration: "6 hours", price: 850 },
+            },
+            maxGuests: 4, 
+            includes: [
+                "Snorkeling gear",
+                "Mesh bags",
+                "Licenses",
+                "Ice and cooler",
+                "Beginner-friendly instructions",
+                "All fishing gear and tackle",
+                "Bait and lures",
+                "Fish cleaning",
+            ],
+            targetSpecies: ["Bay Scallops", "Redfish", "Trout", "Snook"],
+            bestSeasons: "July - September (seasonal)",
         },
         {
-            id: 'combo_scallop_island',
-            title: 'Scalloping + Island Combo',
+            id: "combo_scallop_island",
+            title: "Scalloping + Island Combo",
             icon: Compass,
-            tagline: 'Limit out, then lounge',
-            description: 'Scallop in the morning, then relax at a sandbar/island stop to cool down and enjoy the water.',
-            image: 'https://www.nscharters.com/images/scallop1.webp',
+            tagline: "Limit out, then lounge",
+            description:
+            "Scallop first, then relax at a sandbar/island stop to cool down and enjoy the water.",
+            image: "https://www.nscharters.com/images/scallop1.webp",
             pricing: {
-            fullDay: { duration: '6 hours', price: 750 }
+            fullDay: { duration: "6 hours", price: 750 },
             },
             maxGuests: 5,
             includes: [
-                'Snorkeling gear',
-                'Mesh bags',
-                'Licenses',
-                'Ice and cooler',
-                'Beginner-friendly instructions',
-                'Island / sandbar stop'
+                "Snorkeling gear",
+                "Mesh bags",
+                "Licenses",
+                "Ice and cooler",
+                "Beginner-friendly instructions",
+                "Island / sandbar stop",
             ],
-            targetSpecies: ['Bay Scallops'],
-            bestSeasons: 'July - September (seasonal)'
+            targetSpecies: ["Bay Scallops"],
+            bestSeasons: "July - September (seasonal)",
         },
         {
             id: 'combo_custom',
@@ -386,7 +413,6 @@ export default function Trips() {
           ))}
       </div>
 
-      {/* Optional: show custom combo as its own premium card row */}
       <div className="mt-6 text-left">
         <Card className="border bg-white overflow-hidden">
           <CardContent className="p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">

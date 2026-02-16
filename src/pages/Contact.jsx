@@ -317,8 +317,9 @@ export default function Contact() {
                         <option value="Nearshore Fishing">Nearshore Fishing</option>
                         <option value="Scalloping">Scalloping</option>
                         <option value="Island Hopping">Island Hopping</option>
-                        <option value="Inshore + Island Combo">Inshore + Island Combo</option>
-                        <option value="Nearshore + Island Combo">Nearshore + Island Combo</option>
+                        <option value="Inshore + Nearshore Combo">Inshore + Nearshore Combo</option>
+                        <option value="Island + Inshore Combo">Island + Inshore Combo</option>
+                        <option value="Scalloping + Inshore Combo">Scalloping + Inshore Combo</option>
                         <option value="Scalloping + Island Combo">Scalloping + Island Combo</option>
 
                         <option value="Custom Combo (Build Your Own)">Custom Combo (Build Your Own)</option>
