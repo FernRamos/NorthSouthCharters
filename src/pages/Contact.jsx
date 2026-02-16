@@ -163,7 +163,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Info Cards */}
           <div className="space-y-8">
-            <Card className="shadow-lg">
+            <Card className="shadow-lg mb-16">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   <div
