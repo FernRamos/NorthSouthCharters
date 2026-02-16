@@ -18,7 +18,7 @@ export default function Trips() {
             description: 'Fish calm flats and mangroves for redfish, trout, snook, and more. Smooth waters and light tackle make this perfect for all skill levels.',
             image: 'https://www.nscharters.com/images/snook10.webp',
             pricing: {
-                halfDay: { duration: '4 hours', price: 475 },
+                halfDay: { duration: '4 hours', price: 500 },
                 fullDay: { duration: '6 hours', price: 600 }
             },
             maxGuests: 4,
@@ -41,7 +41,7 @@ export default function Trips() {
             image: 'https://www.nscharters.com/images/grouper1.webp',
             pricing: {
                 halfDay: { duration: '4 hours', price: 550 },
-                fullDay: { duration: '8 hours', price: 750 }
+                fullDay: { duration: '6 hours', price: 750 }
             },
             maxGuests: 4,
             includes: [
@@ -62,7 +62,7 @@ export default function Trips() {
             description: 'Seasonal adventure in the Nature Coast\'s shallow waters. Snorkel, swim, and harvest fresh scallops - easy and fun for the whole family.',
             image: 'https://www.nscharters.com/images/scallop1.webp',
             pricing: {
-                halfDay: { duration: '4 hours', price: 400 }
+                halfDay: { duration: '4 hours', price: 500 }
             },
             maxGuests: 5,
             includes: [
@@ -83,8 +83,8 @@ export default function Trips() {
             description: 'Explore local islands and sandbars. Perfect for swimming, snorkeling, shelling, and enjoying a laid-back day on the water.',
             image: 'https://www.nscharters.com/images/shark1.webp',
             pricing: {
-                halfDay: { duration: '4 hours', price: 375 },
-                fullDay: { duration: '6 hours', price: 525 }
+                halfDay: { duration: '4 hours', price: 500 },
+                fullDay: { duration: '6 hours', price: 600 }
             },
             maxGuests: 5,
             includes: [
@@ -95,7 +95,74 @@ export default function Trips() {
             ],
             targetSpecies: [],
             bestSeasons: 'Year-round (best in warmer months)'
-        }
+        },
+         // ✅ Combo Trips (Premium)
+        {
+            id: 'combo_inshore_island',
+            title: 'Inshore + Island Combo',
+            icon: Compass,
+            tagline: 'Fish early, relax later',
+            description: 'Start with inshore fishing, then cool down with island hopping and swimming.',
+            image: 'https://www.nscharters.com/images/redfish12.webp',
+            pricing: {
+                fullDay: { duration: '6 hours', price: 750 }
+            },
+            maxGuests: 5,
+            includes: [
+                'All fishing gear and tackle',
+                'Bait and lures',
+                'Fishing licenses',
+                'Ice and cooler',
+                'Fish cleaning',
+                'Island / sandbar stop'
+            ],
+            targetSpecies: ['Redfish', 'Snook', 'Speckled Trout'],
+            bestSeasons: 'Year-round'
+        },
+        {
+            id: 'combo_nearshore_island',
+            title: 'Nearshore + Island Combo',
+            icon: Compass,
+            tagline: 'Big fish + beach vibes',
+            description: 'Chase nearshore species, then unwind with a relaxing island stop.',
+            image: 'https://www.nscharters.com/images/grouper4.webp',
+            pricing: {
+                fullDay: { duration: '8 hours', price: 900 }
+            },
+            maxGuests: 5,
+            includes: [
+                'All fishing gear and tackle',
+                'Bait and lures',
+                'Fishing licenses',
+                'Ice and cooler',
+                'Fish cleaning',
+                'Island / sandbar stop'
+            ],
+            targetSpecies: ['Gag Grouper', 'Mangrove Snapper', 'Cobia'],
+            bestSeasons: 'Late summer to Spring'
+        },
+        {
+            id: 'combo_scallop_island',
+            title: 'Scalloping + Island Combo',
+            icon: Compass,
+            tagline: 'Limit out, then lounge',
+            description: 'Scallop in the morning, then relax at a sandbar/island stop to cool down and enjoy the water.',
+            image: 'https://www.nscharters.com/images/scallop1.webp',
+            pricing: {
+            fullDay: { duration: '6 hours', price: 750 }
+            },
+            maxGuests: 5,
+            includes: [
+                'Snorkeling gear',
+                'Mesh bags',
+                'Licenses',
+                'Ice and cooler',
+                'Beginner-friendly instructions',
+                'Island / sandbar stop'
+            ],
+            targetSpecies: ['Bay Scallops'],
+            bestSeasons: 'July - September (seasonal)'
+        },
     ];
 
     const selectedTripData = trips.find(t => t.id === selectedTrip);
@@ -115,7 +182,7 @@ export default function Trips() {
             {/* Trip Selection */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-                    {trips.map((trip) => (
+                    {trips.filter(t => !t.id.startsWith('combo_')).map((trip) => (
                         <Card
                             key={trip.id}
                             className="cursor-pointer transition hover:shadow-lg"
@@ -141,6 +208,105 @@ export default function Trips() {
                         </Card>
                     ))}
                 </div>
+
+{/* Premium Combo Trips Box */}
+<div className="mb-12">
+  <div
+    className="rounded-2xl p-6 shadow-xl border"
+    style={{
+      background:
+        "linear-gradient(135deg, rgba(216,168,96,0.20) 0%, rgba(88,152,232,0.18) 100%)",
+      borderColor: "rgba(216,168,96,0.55)",
+    }}
+  >
+    <div className="flex items-center justify-between gap-4 mb-5">
+      <div>
+        <h3 className="text-2xl font-bold" style={{ color: "var(--brand-navy)" }}>
+          Combo Trips
+        </h3>
+        <p className="text-slate-700">
+          Premium adventures that mix fishing or scalloping with island time.
+        </p>
+      </div>
+
+      <div
+        className="px-3 py-1.5 rounded-full text-sm font-semibold"
+        style={{
+          backgroundColor: "rgba(216,168,96,0.35)",
+          color: "var(--brand-navy)",
+          border: "1px solid rgba(216,168,96,0.55)",
+        }}
+      >
+        Premium Upgrades
+      </div>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {trips
+        .filter((t) => t.id.startsWith("combo_"))
+        .map((combo) => (
+          <button
+            key={combo.id}
+            type="button"
+            onClick={() => setSelectedTrip(combo.id)}
+            className="text-left w-full rounded-xl overflow-hidden transition hover:shadow-2xl border bg-white"
+            style={{
+              borderColor:
+                selectedTrip === combo.id
+                  ? "var(--brand-sky)"
+                  : "rgba(15,23,42,0.12)",
+            }}
+          >
+            <div className="relative">
+              <img
+                src={combo.image}
+                alt={combo.title}
+                className="w-full h-40 object-cover"
+              />
+              <div
+                className="absolute top-3 left-3 px-3 py-1 rounded-full text-sm font-semibold"
+                style={{ backgroundColor: "rgba(32,80,144,0.85)", color: "white" }}
+              >
+                Premium Combo
+              </div>
+            </div>
+
+            <div className="p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <div className="text-lg font-bold text-slate-900">{combo.title}</div>
+                  <div className="text-sm text-slate-600">{combo.tagline}</div>
+                </div>
+
+                <div className="text-right">
+                  <div className="text-sm text-slate-500 flex items-center justify-end gap-1">
+                    <Clock size={14} />
+                    {combo.pricing.fullDay?.duration}
+                  </div>
+                  <div className="text-2xl font-bold" style={{ color: "var(--brand-navy)" }}>
+                    ${combo.pricing.fullDay?.price}
+                  </div>
+                </div>
+              </div>
+
+              <p className="mt-3 text-sm text-slate-700">{combo.description}</p>
+
+              <div className="mt-4 flex items-center justify-between text-sm text-slate-600">
+                <div className="flex items-center gap-2">
+                  <Users size={16} />
+                  <span>Up to {combo.maxGuests}</span>
+                </div>
+
+                <span className="font-semibold" style={{ color: "var(--brand-sky)" }}>
+                  View details →
+                </span>
+              </div>
+            </div>
+          </button>
+        ))}
+    </div>
+  </div>
+</div>
 
                 {/* Selected Trip Details */}
                 {selectedTripData && (
