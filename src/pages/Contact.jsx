@@ -241,7 +241,7 @@ export default function Contact() {
           <div className="lg:col-span-2">
             <Card className="shadow-xl rounded-2xl overflow-hidden">
               <div
-                className="p-6 text-slate-900"
+                className="p-6 text-slate-900 rounded-t-2xl"
                 style={{
                   background:
                     "linear-gradient(to right, var(--brand-gold), var(--brand-gold-deep))",
