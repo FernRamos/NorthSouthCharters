@@ -160,9 +160,9 @@ export default function Contact() {
   </CardContent>
 </Card>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Info Cards */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <Card className="shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
@@ -239,7 +239,7 @@ export default function Contact() {
 
           {/* Booking Form */}
           <div className="lg:col-span-2">
-            <Card className="shadow-xl">
+            <Card className="shadow-xl rounded-2xl overflow-hidden">
               <div
                 className="p-6 text-slate-900"
                 style={{
