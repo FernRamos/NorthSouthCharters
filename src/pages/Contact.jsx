@@ -1,15 +1,34 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import { useLocation } from "react-router-dom";
 
 export default function Contact() {
   const TO_EMAIL = "captfern@nscharters.com";
 
   const today = useMemo(() => new Date().toISOString().split("T")[0], []);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+
+    const tripType = params.get("tripType") || "";
+    const message = params.get("message") || "";
+
+    // only apply if something was actually passed
+    if (tripType || message) {
+      setFormData((prev) => ({
+        ...prev,
+        tripType: tripType || prev.tripType,
+        message: message || prev.message,
+      }));
+    }
+  }, [location.search]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -25,7 +44,7 @@ export default function Contact() {
   const [success, setSuccess] = useState(false);
 
   const maxGuests =
-    formData.tripType === "Scalloping" || formData.tripType === "Island Hopping"
+    formData.tripType === "Scalloping" || formData.tripType === "Island Hopping" || formData.tripType === "Scalloping + Island Combo"
       ? 5
       : 4;
 
@@ -298,6 +317,11 @@ export default function Contact() {
                         <option value="Nearshore Fishing">Nearshore Fishing</option>
                         <option value="Scalloping">Scalloping</option>
                         <option value="Island Hopping">Island Hopping</option>
+                        <option value="Inshore + Island Combo">Inshore + Island Combo</option>
+                        <option value="Nearshore + Island Combo">Nearshore + Island Combo</option>
+                        <option value="Scalloping + Island Combo">Scalloping + Island Combo</option>
+
+                        <option value="Custom Combo (Build Your Own)">Custom Combo (Build Your Own)</option>
                       </select>
                     </div>
 

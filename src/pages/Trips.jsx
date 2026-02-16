@@ -108,7 +108,7 @@ export default function Trips() {
             pricing: {
                 fullDay: { duration: '6 hours', price: 750 }
             },
-            maxGuests: 5,
+            maxGuests: 4,
             includes: [
                 'All fishing gear and tackle',
                 'Bait and lures',
@@ -130,7 +130,7 @@ export default function Trips() {
             pricing: {
                 fullDay: { duration: '8 hours', price: 900 }
             },
-            maxGuests: 5,
+            maxGuests: 4,
             includes: [
                 'All fishing gear and tackle',
                 'Bait and lures',
@@ -233,15 +233,15 @@ export default function Trips() {
 
 {/* Premium Combo Trips Box */}
 <div className="mb-12 text-center">
-
   {!showCombos && (
     <Button
       size="lg"
       onClick={() => setShowCombos(true)}
       className="px-8 py-6 text-lg font-semibold shadow-lg"
       style={{
-        background: "linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-sky) 100%)",
-        color: "white"
+        background:
+          "linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-sky) 100%)",
+        color: "white",
       }}
     >
       Explore Premium Combo Trips
@@ -257,30 +257,74 @@ export default function Trips() {
         borderColor: "rgba(216,168,96,0.55)",
       }}
     >
+      <div className="flex items-center justify-between gap-4 mb-5">
+        <div className="text-left">
+          <h3
+            className="text-2xl font-bold"
+            style={{ color: "var(--brand-navy)" }}
+          >
+            Combo Trips
+          </h3>
+          <p className="text-slate-700">
+            Premium adventures that mix fishing or scalloping with island time.
+          </p>
+        </div>
 
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-2xl font-bold" style={{ color: "var(--brand-navy)" }}>
-          Premium Combo Adventures
-        </h3>
+        <div className="flex items-center gap-3">
+          {/* Custom Combo CTA */}
+          <Link
+            to={`/Contact?tripType=${encodeURIComponent(
+              "Custom Combo (Build Your Own)"
+            )}&message=${encodeURIComponent(
+              "Hi! I’m interested in a Custom Combo Package. We’d like to combine fishing or scalloping with an island/sandbar stop. Our group size is __, and we’re hoping to go on __. Can you confirm availability and pricing?"
+            )}`}
+          >
+            <Button
+              size="sm"
+              className="text-slate-900 font-semibold"
+              style={{ backgroundColor: "var(--brand-gold)" }}
+            >
+              Build a Custom Combo
+            </Button>
+          </Link>
 
-        <button
-          onClick={() => setShowCombos(false)}
-          className="text-sm font-semibold hover:underline"
-          style={{ color: "var(--brand-sky)" }}
-        >
-          Hide Combos
-        </button>
+          <div
+            className="px-3 py-1.5 rounded-full text-sm font-semibold"
+            style={{
+              backgroundColor: "rgba(216,168,96,0.35)",
+              color: "var(--brand-navy)",
+              border: "1px solid rgba(216,168,96,0.55)",
+            }}
+          >
+            Premium Upgrades
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setShowCombos(false)}
+            className="text-sm font-semibold hover:underline"
+            style={{ color: "var(--brand-sky)" }}
+          >
+            Hide
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {trips
-          .filter((t) => t.id.startsWith("combo_"))
+          .filter((t) => t.id.startsWith("combo_") && t.id !== "combo_custom")
           .map((combo) => (
             <button
               key={combo.id}
               type="button"
               onClick={() => setSelectedTrip(combo.id)}
               className="text-left w-full rounded-xl overflow-hidden transition hover:shadow-2xl border bg-white"
+              style={{
+                borderColor:
+                  selectedTrip === combo.id
+                    ? "var(--brand-sky)"
+                    : "rgba(15,23,42,0.12)",
+              }}
             >
               <div className="relative">
                 <img
@@ -290,22 +334,86 @@ export default function Trips() {
                 />
                 <div
                   className="absolute top-3 left-3 px-3 py-1 rounded-full text-sm font-semibold"
-                  style={{ backgroundColor: "rgba(32,80,144,0.85)", color: "white" }}
+                  style={{
+                    backgroundColor: "rgba(32,80,144,0.85)",
+                    color: "white",
+                  }}
                 >
-                  Premium
+                  Premium Combo
                 </div>
               </div>
 
               <div className="p-4">
-                <div className="text-lg font-bold text-slate-900">
-                  {combo.title}
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="text-lg font-bold text-slate-900">
+                      {combo.title}
+                    </div>
+                    <div className="text-sm text-slate-600">{combo.tagline}</div>
+                  </div>
+
+                  <div className="text-right">
+                    <div className="text-sm text-slate-500 flex items-center justify-end gap-1">
+                      <Clock size={14} />
+                      {combo.pricing.fullDay?.duration}
+                    </div>
+                    <div
+                      className="text-2xl font-bold"
+                      style={{ color: "var(--brand-navy)" }}
+                    >
+                      ${combo.pricing.fullDay?.price}
+                    </div>
+                  </div>
                 </div>
-                <div className="text-sm text-slate-600">
-                  {combo.pricing.fullDay?.duration} — ${combo.pricing.fullDay?.price}
+
+                <p className="mt-3 text-sm text-slate-700">{combo.description}</p>
+
+                <div className="mt-4 flex items-center justify-between text-sm text-slate-600">
+                  <div className="flex items-center gap-2">
+                    <Users size={16} />
+                    <span>Up to {combo.maxGuests}</span>
+                  </div>
+
+                  <span
+                    className="font-semibold"
+                    style={{ color: "var(--brand-sky)" }}
+                  >
+                    View details →
+                  </span>
                 </div>
               </div>
             </button>
           ))}
+      </div>
+
+      {/* Optional: show custom combo as its own premium card row */}
+      <div className="mt-6 text-left">
+        <Card className="border bg-white overflow-hidden">
+          <CardContent className="p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <div className="text-lg font-bold text-slate-900">
+                Build-Your-Own Combo (Custom)
+              </div>
+              <div className="text-sm text-slate-600">
+                Tell us what you want to combine — we’ll plan it around your group and conditions.
+              </div>
+            </div>
+            <Link
+              to={`/Contact?tripType=${encodeURIComponent(
+                "Custom Combo (Build Your Own)"
+              )}&message=${encodeURIComponent(
+                "Hi! I’m interested in a Custom Combo Package. We’d like to combine fishing or scalloping with an island/sandbar stop. Our group size is __, and we’re hoping to go on __. Can you confirm availability and pricing?"
+              )}`}
+            >
+              <Button
+                className="text-slate-900 font-semibold"
+                style={{ backgroundColor: "var(--brand-gold)" }}
+              >
+                Build a Custom Combo
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )}
