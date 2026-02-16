@@ -259,37 +259,40 @@ export default function Trips() {
                 </div>
 
 {/* Premium Combo Trips Box */}
-<div className="mb-12 text-center">
+<div className="mb-12">
+  {/* Toggle Button */}
   {!showCombos && (
-    <Button
-      size="lg"
-      onClick={() => setShowCombos(true)}
-      className="px-8 py-6 text-lg font-semibold shadow-lg"
-      style={{
-        background:
-          "linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-sky) 100%)",
-        color: "white",
-      }}
-    >
-      Explore Premium Combo Trips
-    </Button>
+    <div className="text-center">
+      <Button
+        size="lg"
+        onClick={() => setShowCombos(true)}
+        className="px-8 py-6 text-lg font-semibold shadow-lg"
+        style={{
+          background:
+            "linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-sky) 100%)",
+          color: "white",
+        }}
+      >
+        Explore Premium Combo Trips
+      </Button>
+    </div>
   )}
 
+  {/* Expanded Combo Box */}
   {showCombos && (
     <div
-      className="mt-8 rounded-2xl p-6 shadow-xl border transition-all duration-500"
+      className="mt-8 rounded-2xl p-5 sm:p-6 shadow-xl border transition-all duration-500"
       style={{
         background:
           "linear-gradient(135deg, rgba(216,168,96,0.20) 0%, rgba(88,152,232,0.18) 100%)",
         borderColor: "rgba(216,168,96,0.55)",
       }}
     >
-      <div className="flex items-center justify-between gap-4 mb-5">
+      {/* Header (mobile-first) */}
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-6">
+        {/* Left text */}
         <div className="text-left">
-          <h3
-            className="text-2xl font-bold"
-            style={{ color: "var(--brand-navy)" }}
-          >
+          <h3 className="text-2xl font-bold" style={{ color: "var(--brand-navy)" }}>
             Combo Trips
           </h3>
           <p className="text-slate-700">
@@ -297,7 +300,8 @@ export default function Trips() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        {/* Right actions */}
+        <div className="flex flex-col sm:flex-row gap-3 sm:items-center md:justify-end">
           {/* Custom Combo CTA */}
           <Link
             to={`/Contact?tripType=${encodeURIComponent(
@@ -305,10 +309,11 @@ export default function Trips() {
             )}&message=${encodeURIComponent(
               "Hi! I’m interested in a Custom Combo Package. We’d like to combine fishing or scalloping with an island/sandbar stop. Our group size is __, and we’re hoping to go on __. Can you confirm availability and pricing?"
             )}`}
+            className="w-full sm:w-auto"
           >
             <Button
-              size="sm"
-              className="text-slate-900 font-semibold"
+              size="lg"
+              className="w-full sm:w-auto text-slate-900 font-semibold"
               style={{ backgroundColor: "var(--brand-gold)" }}
             >
               Build a Custom Combo
@@ -316,7 +321,7 @@ export default function Trips() {
           </Link>
 
           <div
-            className="px-3 py-1.5 rounded-full text-sm font-semibold"
+            className="w-full sm:w-auto px-3 py-2 rounded-full text-sm font-semibold text-center"
             style={{
               backgroundColor: "rgba(216,168,96,0.35)",
               color: "var(--brand-navy)",
@@ -329,7 +334,7 @@ export default function Trips() {
           <button
             type="button"
             onClick={() => setShowCombos(false)}
-            className="text-sm font-semibold hover:underline"
+            className="text-sm font-semibold hover:underline text-center sm:text-left"
             style={{ color: "var(--brand-sky)" }}
           >
             Hide
@@ -337,7 +342,8 @@ export default function Trips() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {/* Combo Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
         {trips
           .filter((t) => t.id.startsWith("combo_") && t.id !== "combo_custom")
           .map((combo) => (
@@ -357,7 +363,7 @@ export default function Trips() {
                 <img
                   src={combo.image}
                   alt={combo.title}
-                  className="w-full h-40 object-cover"
+                  className="w-full h-40 sm:h-44 object-cover"
                 />
                 <div
                   className="absolute top-3 left-3 px-3 py-1 rounded-full text-sm font-semibold"
@@ -371,16 +377,17 @@ export default function Trips() {
               </div>
 
               <div className="p-4">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="text-lg font-bold text-slate-900">
+                {/* Title + Price row (mobile safe) */}
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <div className="text-lg font-bold text-slate-900 leading-tight">
                       {combo.title}
                     </div>
                     <div className="text-sm text-slate-600">{combo.tagline}</div>
                   </div>
 
-                  <div className="text-right">
-                    <div className="text-sm text-slate-500 flex items-center justify-end gap-1">
+                  <div className="text-right shrink-0">
+                    <div className="text-xs text-slate-500 flex items-center justify-end gap-1">
                       <Clock size={14} />
                       {combo.pricing.fullDay?.duration}
                     </div>
@@ -401,10 +408,7 @@ export default function Trips() {
                     <span>Up to {combo.maxGuests}</span>
                   </div>
 
-                  <span
-                    className="font-semibold"
-                    style={{ color: "var(--brand-sky)" }}
-                  >
+                  <span className="font-semibold" style={{ color: "var(--brand-sky)" }}>
                     View details →
                   </span>
                 </div>
@@ -413,7 +417,8 @@ export default function Trips() {
           ))}
       </div>
 
-      <div className="mt-6 text-left">
+      {/* Custom Combo Footer Card */}
+      <div className="mt-6">
         <Card className="border bg-white overflow-hidden">
           <CardContent className="p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
@@ -424,15 +429,17 @@ export default function Trips() {
                 Tell us what you want to combine — we’ll plan it around your group and conditions.
               </div>
             </div>
+
             <Link
               to={`/Contact?tripType=${encodeURIComponent(
                 "Custom Combo (Build Your Own)"
               )}&message=${encodeURIComponent(
                 "Hi! I’m interested in a Custom Combo Package. We’d like to combine fishing or scalloping with an island/sandbar stop. Our group size is __, and we’re hoping to go on __. Can you confirm availability and pricing?"
               )}`}
+              className="w-full md:w-auto"
             >
               <Button
-                className="text-slate-900 font-semibold"
+                className="w-full md:w-auto text-slate-900 font-semibold"
                 style={{ backgroundColor: "var(--brand-gold)" }}
               >
                 Build a Custom Combo
