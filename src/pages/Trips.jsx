@@ -8,6 +8,7 @@ import { Fish, Waves, Shell, Compass, Clock, DollarSign, Users, CheckCircle2 } f
 
 export default function Trips() {
     const [selectedTrip, setSelectedTrip] = useState('inshore');
+    const [showCombos, setShowCombos] = useState(false);
 
     const trips = [
         {
@@ -163,6 +164,27 @@ export default function Trips() {
             targetSpecies: ['Bay Scallops'],
             bestSeasons: 'July - September (seasonal)'
         },
+        {
+            id: 'combo_custom',
+            title: 'Build-Your-Own Combo (Custom)',
+            icon: Compass,
+            tagline: 'You pick the vibe',
+            description: 'Want to taget specific fish + island time, or scalloping + a sandbar stop? Tell us what you’re thinking and we’ll tailor the full-day plan around your group and conditions.',
+            image: 'https://www.nscharters.com/images/redfish12.webp', // swap to your preferred “premium” photo
+            pricing: {
+                fullDay: { duration: '8 hours', price: 950 }
+            },
+            maxGuests: 4,
+            includes: [
+                'Choose experiences (Fishing / Scalloping / Island)',
+                'All required gear for the selected activities',
+                'Ice and cooler',
+                'Safety equipment',
+                'Local guidance + trip planning'
+            ],
+            targetSpecies: ['Varies by combo'],
+            bestSeasons: 'Year-round (scalloping seasonal)'
+        },
     ];
 
     const selectedTripData = trips.find(t => t.id === selectedTrip);
@@ -210,102 +232,83 @@ export default function Trips() {
                 </div>
 
 {/* Premium Combo Trips Box */}
-<div className="mb-12">
-  <div
-    className="rounded-2xl p-6 shadow-xl border"
-    style={{
-      background:
-        "linear-gradient(135deg, rgba(216,168,96,0.20) 0%, rgba(88,152,232,0.18) 100%)",
-      borderColor: "rgba(216,168,96,0.55)",
-    }}
-  >
-    <div className="flex items-center justify-between gap-4 mb-5">
-      <div>
+<div className="mb-12 text-center">
+
+  {!showCombos && (
+    <Button
+      size="lg"
+      onClick={() => setShowCombos(true)}
+      className="px-8 py-6 text-lg font-semibold shadow-lg"
+      style={{
+        background: "linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-sky) 100%)",
+        color: "white"
+      }}
+    >
+      Explore Premium Combo Trips
+    </Button>
+  )}
+
+  {showCombos && (
+    <div
+      className="mt-8 rounded-2xl p-6 shadow-xl border transition-all duration-500"
+      style={{
+        background:
+          "linear-gradient(135deg, rgba(216,168,96,0.20) 0%, rgba(88,152,232,0.18) 100%)",
+        borderColor: "rgba(216,168,96,0.55)",
+      }}
+    >
+
+      <div className="flex items-center justify-between mb-6">
         <h3 className="text-2xl font-bold" style={{ color: "var(--brand-navy)" }}>
-          Combo Trips
+          Premium Combo Adventures
         </h3>
-        <p className="text-slate-700">
-          Premium adventures that mix fishing or scalloping with island time.
-        </p>
+
+        <button
+          onClick={() => setShowCombos(false)}
+          className="text-sm font-semibold hover:underline"
+          style={{ color: "var(--brand-sky)" }}
+        >
+          Hide Combos
+        </button>
       </div>
 
-      <div
-        className="px-3 py-1.5 rounded-full text-sm font-semibold"
-        style={{
-          backgroundColor: "rgba(216,168,96,0.35)",
-          color: "var(--brand-navy)",
-          border: "1px solid rgba(216,168,96,0.55)",
-        }}
-      >
-        Premium Upgrades
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {trips
+          .filter((t) => t.id.startsWith("combo_"))
+          .map((combo) => (
+            <button
+              key={combo.id}
+              type="button"
+              onClick={() => setSelectedTrip(combo.id)}
+              className="text-left w-full rounded-xl overflow-hidden transition hover:shadow-2xl border bg-white"
+            >
+              <div className="relative">
+                <img
+                  src={combo.image}
+                  alt={combo.title}
+                  className="w-full h-40 object-cover"
+                />
+                <div
+                  className="absolute top-3 left-3 px-3 py-1 rounded-full text-sm font-semibold"
+                  style={{ backgroundColor: "rgba(32,80,144,0.85)", color: "white" }}
+                >
+                  Premium
+                </div>
+              </div>
+
+              <div className="p-4">
+                <div className="text-lg font-bold text-slate-900">
+                  {combo.title}
+                </div>
+                <div className="text-sm text-slate-600">
+                  {combo.pricing.fullDay?.duration} — ${combo.pricing.fullDay?.price}
+                </div>
+              </div>
+            </button>
+          ))}
       </div>
     </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-      {trips
-        .filter((t) => t.id.startsWith("combo_"))
-        .map((combo) => (
-          <button
-            key={combo.id}
-            type="button"
-            onClick={() => setSelectedTrip(combo.id)}
-            className="text-left w-full rounded-xl overflow-hidden transition hover:shadow-2xl border bg-white"
-            style={{
-              borderColor:
-                selectedTrip === combo.id
-                  ? "var(--brand-sky)"
-                  : "rgba(15,23,42,0.12)",
-            }}
-          >
-            <div className="relative">
-              <img
-                src={combo.image}
-                alt={combo.title}
-                className="w-full h-40 object-cover"
-              />
-              <div
-                className="absolute top-3 left-3 px-3 py-1 rounded-full text-sm font-semibold"
-                style={{ backgroundColor: "rgba(32,80,144,0.85)", color: "white" }}
-              >
-                Premium Combo
-              </div>
-            </div>
-
-            <div className="p-4">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="text-lg font-bold text-slate-900">{combo.title}</div>
-                  <div className="text-sm text-slate-600">{combo.tagline}</div>
-                </div>
-
-                <div className="text-right">
-                  <div className="text-sm text-slate-500 flex items-center justify-end gap-1">
-                    <Clock size={14} />
-                    {combo.pricing.fullDay?.duration}
-                  </div>
-                  <div className="text-2xl font-bold" style={{ color: "var(--brand-navy)" }}>
-                    ${combo.pricing.fullDay?.price}
-                  </div>
-                </div>
-              </div>
-
-              <p className="mt-3 text-sm text-slate-700">{combo.description}</p>
-
-              <div className="mt-4 flex items-center justify-between text-sm text-slate-600">
-                <div className="flex items-center gap-2">
-                  <Users size={16} />
-                  <span>Up to {combo.maxGuests}</span>
-                </div>
-
-                <span className="font-semibold" style={{ color: "var(--brand-sky)" }}>
-                  View details →
-                </span>
-              </div>
-            </div>
-          </button>
-        ))}
-    </div>
-  </div>
+  )}
 </div>
 
                 {/* Selected Trip Details */}
