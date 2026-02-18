@@ -3,7 +3,6 @@ import React, { createContext, useContext, useMemo } from "react";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  // Static site: no Base44 auth/app-state exists.
   // We keep the same shape so other components don't break.
   const value = useMemo(
     () => ({

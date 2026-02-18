@@ -32,7 +32,7 @@ export default function Layout({ children, currentPageName }) {
     <div
       className="min-h-screen flex flex-col"
       style={{
-        backgroundImage: `url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696666cb8b0ce9b9ee0be45f/578cab6ba_background.jpg')`,
+        backgroundImage: `url('/images/background.jpeg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
@@ -150,14 +150,17 @@ export default function Layout({ children, currentPageName }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* About */}
             <div>
+              <Link to={createPageUrl("Home")}>
               <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696666cb8b0ce9b9ee0be45f/0a3cc0b7c_logo-horizontal.png"
-                alt="North South Charters"
-                className="h-16 mb-4"
+              src="/images/logo-horizontal.png"
+              alt="North South Charters logo"
+              className="h-16 mb-4 cursor-pointer"
               />
+              </Link>
               <p className="text-sm">
-                Nature Coast Charters. Family-friendly trips, inshore,
-                nearshore, scalloping, and island hopping adventures.
+                North South Charters — launching from Turtle Cove Marina in Tarpon Springs.
+                Family-friendly inshore, nearshore, scalloping, and island-hopping adventures
+                along Florida’s Nature Coast.
               </p>
             </div>
 

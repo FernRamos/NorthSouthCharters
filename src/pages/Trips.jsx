@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +9,19 @@ import { Fish, Waves, Shell, Compass, Clock, DollarSign, Users, CheckCircle2 } f
 export default function Trips() {
     const [selectedTrip, setSelectedTrip] = useState('inshore');
     const [showCombos, setShowCombos] = useState(false);
+    const detailsRef = useRef(null);
+    
+    useEffect(() => {
+        // only scroll after the details section exists
+        if (!detailsRef.current) return;
+
+        // smooth scroll to the details section
+        detailsRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        });
+    }, [selectedTrip]);
+
 
     const trips = [
         {
@@ -408,9 +421,17 @@ export default function Trips() {
                     <span>Up to {combo.maxGuests}</span>
                   </div>
 
-                  <span className="font-semibold" style={{ color: "var(--brand-sky)" }}>
+                  <button
+                    type="button"
+                    className="font-semibold"
+                    style={{ color: "var(--brand-sky)" }}
+                    onClick={(e) => {
+                    e.stopPropagation();      // don’t double-trigger card click
+                    setSelectedTrip(combo.id);
+                    }}
+                 >
                     View details →
-                  </span>
+                </button>
                 </div>
               </div>
             </button>
@@ -454,7 +475,7 @@ export default function Trips() {
 
                 {/* Selected Trip Details */}
                 {selectedTripData && (
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div ref={detailsRef} className="grid grid-cols-1 lg:grid-cols-2 gap-8 scroll-mt-24">
                         {/* Image & Description */}
                         <div>
                             <div className="rounded-xl overflow-hidden shadow-lg mb-6">
